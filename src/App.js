@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import {Button, Card, Col, Container, Row} from "react-bootstrap";
 
 const App = () => {
 
@@ -33,16 +34,38 @@ const App = () => {
     //map은 Araay일때만 사용 가능.
 
     return (
-        <div>
-            <h1>{movies.length}</h1>
-            {movies && movies.map(m => (
-                <div>
-                    <h2>{m.title}</h2>
-                    <h3>출시일 : {m.release_date}</h3>
-                    <h4>평점 : {m.vote_average}</h4>
-                </div>
-            ))}
-        </div>
+        // <div>
+        //     <h1>{movies.length}</h1>
+        //     {movies && movies.map(m => (
+        //         <div>
+        //             <h2>{m.title}</h2>
+        //             <h3>출시일 : {m.release_date}</h3>
+        //             <h4>평점 : {m.vote_average}</h4>
+        //         </div>
+        //     ))}
+        // </div>
+        <Container>
+            <Row>
+                {movies && movies.map(m => (
+                    <Col className={"mt-5"}>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500" + m.poster_path} />
+                            <Card.Body>
+                                <Card.Title>{m.title.slice(0, 15)}</Card.Title>
+                                <Card.Text>
+                                    {m.overview.slice(0, 90)}
+                                </Card.Text>
+                                <Card.Text>
+                                    출시일 : {m.release_date.slice(0, 90)}
+                                </Card.Text>
+                                <Button variant="primary">Go somewhere</Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    ))}
+
+            </Row>
+        </Container>
     );
 };
 
